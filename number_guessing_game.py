@@ -9,8 +9,8 @@ secret_num = random.randint(1,100) # computer generates a random number
 while is_running:
     user_input = int(input("Guess the number between 1 to 100\n"))
     if user_input<1 or user_input>100 :
-        print("Invalid input! Given range should be considered! ")
-        break
+        print("Given range should be considered!")
+        continue
 
     if (secret_num == user_input):
         print("---- Congratulation You won ----")
@@ -19,8 +19,8 @@ while is_running:
     else:
         print("You lose! ")
 
-    choice = input("Wanna Try Again? (Y/N)\n".lower())
-    if (choice == 'y'):
+    choice = input("Wanna Try Again? (Y/N)\n")
+    if (choice == 'y' or choice == 'Y'):
         print("Lets Go! Game makes mind refreshing!")
         counter += 1 
         if (secret_num <= 30 and secret_num >= 1): # Trying to give hints 
@@ -34,7 +34,7 @@ while is_running:
         else:
             print("Invalid input!")
         continue
-    elif (choice == 'n'): 
+    elif (choice == 'n' or choice == 'N'  ): 
         break
     else:
         print("Invalid input")
