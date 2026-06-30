@@ -30,7 +30,7 @@ def procces_logs(file_path):
                     raise CorruptLogError(f"INVALID log format: {clean_line}")
                 print(f"Proccessing valid line: {clean_line}")
             except CorruptLogError as e:
-                rejected_file.write(f"REJECTED: {clean_line}")
+                rejected_file.write(f"REJECTED: {clean_line}\n")
         return "DONE"
 
 result1=procces_logs("new.txt")
