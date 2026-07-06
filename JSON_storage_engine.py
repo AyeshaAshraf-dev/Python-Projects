@@ -4,8 +4,8 @@ import json
 Student = namedtuple('Student', ['Name', 'Class', 'Age', 'SchoolName'])
 
 student_database = defaultdict(list)
-restored_database = defaultdict(list)
-add_students = list()
+# restored_database = defaultdict(list)
+# add_students = list()
 # s1 = Student('monica', 4,'9','gvm school system')
 # s2 = Student('isha', 5,'11','damd public school')
 # s3 = Student('jaqualine', 4,'11','md school system')
@@ -26,7 +26,7 @@ for class_id in data:
     student_list = data[class_id]
     for student_dict in student_list:
         s = Student(**student_dict)
-        restored_database[int(class_id)].append(s)
+        student_database[int(class_id)].append(s)
 # print(restored_database)
 # CRUD create,read,update,del
 def add_student(name,Class,age,schname):
@@ -34,9 +34,6 @@ def add_student(name,Class,age,schname):
     student_dict = s._asdict() 
     student_database[s.Class].append(student_dict)
     
-
-add_student('isha', 5,'11','damd public school')
-add_student('jaqualine', 4,'11','md school system')
 
 
 with open('JSON_storage_engine.json', 'w') as f:
@@ -50,4 +47,32 @@ def find_student(Class,name):
     print("Student not found")
 
 
-find_student(5,"isha")
+# find_student(5,"isha")
+print("----STUDENT STORAGE----")
+while True:
+    print("1. Add student")
+    print("2. Search student")
+    print("3. Exit")
+
+    choice = int(input("Enter your choice (1-3)\n"))
+    if choice == 1:
+        name = input("Enter name: ")
+        Class = int(input("Enter class: "))  # Convert to int for your database key!
+        age = input("Enter age: ")
+        schname = input("Enter school: ")
+
+        add_student(name, Class,age,schname)
+
+        with open('JSON_storage_engine.json','w') as f:
+            json.dump(student_database, f, indent=2)
+        print("Saved successfully")
+
+    elif choice == 2:
+        Class = int(input("Enter class to search in: "))
+        name = input("Enter student name to find: ")
+
+        find_student(Class, name)
+
+    elif choice == 3:
+        print("GOODBYEE")
+        break
