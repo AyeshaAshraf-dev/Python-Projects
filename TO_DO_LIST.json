@@ -1,27 +1,17 @@
 [
   {
-    "task_name": "cook",
-    "task_priority": "medium",
-    "completed": true
-  },
-  {
-    "task_name": "read",
-    "task_priority": "high",
-    "completed": false
-  },
-  {
     "task_name": "study",
     "task_priority": "high",
     "completed": false
   },
   {
-    "task_name": "readdd",
-    "task_priority": "low",
-    "completed": false
+    "task_name": "reading",
+    "task_priority": "high",
+    "completed": true
   },
   {
-    "task_name": "e",
-    "task_priority": "e",
+    "task_name": "",
+    "task_priority": "",
     "completed": false
   }
 ]
