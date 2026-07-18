@@ -77,7 +77,11 @@ def update(my_to_do_list):
             my_to_do_list = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
         []
-    task_update = int(input("Which task do u want to update: \n"))
+    if not  my_to_do_list:
+        print("Empty list! Try to enter the data first ")
+        time.sleep(0.7)
+        return
+    task_update = int(input("Enter the number of the task do u want to update: \n"))
     corrected_index = task_update - 1
     # print(corrected_index)
     # print(f"DEBUG: Current list contents: {my_to_do_list}")
@@ -90,7 +94,7 @@ def update(my_to_do_list):
             with open('TO_DO_LIST.json', 'w') as f:
     #     json.load(my_to_do_list, f, indent=2)
                 json.dump(my_to_do_list, f, indent=2)
-            print("The task is mark as completed! ")
+            print("The task is marked as completed! ")
         elif task_index == "2":
             new_name = input("Enter the updated name\n: ")
             my_to_do_list[corrected_index]["task_name"] = new_name
@@ -106,13 +110,33 @@ def update(my_to_do_list):
             with open('TO_DO_LIST.json', 'w') as f:
     #     json.load(my_to_do_list, f, indent=2)
                 json.dump(my_to_do_list, f, indent=2)
-            print("Name is updated")
+            print("priority is updated")
         else:
             print("invalid action choice ")
 
     else:
         print("Task does not exist! ")
-          
+
+def delete(my_to_do_list):
+    view(my_to_do_list)
+    try:
+        with open('TO_DO_LIST.json', 'r') as f:
+            my_to_do_list = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        []
+    if not  my_to_do_list:
+        print("Empty list! Try to enter the data first ")
+        time.sleep(0.7)
+        return
+    task_update = int(input("Which task do u want to delete: \n"))
+    corrected_index = task_update - 1
+    # my_to_do_list[corrected_index] = new_thing
+    # del(new_thing)
+    del(my_to_do_list[corrected_index])
+    with open('TO_DO_LIST.json', 'w') as f:
+    #     json.load(my_to_do_list, f, indent=2)
+            json.dump(my_to_do_list, f, indent=2)
+    print(f'The task is deleted successfully! ')          
     
 # create()
 # print(to_do_list)
@@ -128,7 +152,7 @@ def main():
     my_to_do_list = load_file()
     while True:
         # my_to_do_list = []
-        print("-------TO DO LIST-----\n1. ADD A TASK\n2. VIEW A TASK\n3. UPDATE A TASK\n4. DEL A TASK\n5. Exit")
+        print("-------TO DO LIST-----\n1. ADD A TASK\n2. VIEW A TASK\n3. UPDATE A TASK\n4. DELETE A TASK\n5. Exit")
         choice_user = input("Enter the choice: ")
         time.sleep(1)
         if choice_user == '5':
@@ -144,8 +168,7 @@ def main():
             update(my_to_do_list)
             continue
         elif choice_user == '4':
-            print("i didnt write it yet")
-            del(my_to_do_list)
+            delete(my_to_do_list)
             continue
         else:
             print("Invalid choice")
